@@ -10,6 +10,9 @@ class SurveyUserInput(models.Model):
     # Adding barcode_sn field if it's not already provided by other modules
     barcode_sn = fields.Char(string='Barkod / Seri No')
 
+    # Related field to check if the survey is a special form
+    is_special_form = fields.Boolean(related='survey_id.is_special_form', string="Is Special Form", store=True)
+
     # Generic fields for dynamic columns (up to 40 questions)
     p01 = fields.Char(compute='_compute_dynamic_fields')
     p02 = fields.Char(compute='_compute_dynamic_fields')

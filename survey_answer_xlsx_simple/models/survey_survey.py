@@ -14,6 +14,8 @@ except ImportError:
 class SurveySurvey(models.Model):
     _inherit = 'survey.survey'
 
+    is_special_form = fields.Boolean(string="Is Special Form")
+
     def action_view_user_inputs(self):
         self.ensure_one()
         action = self.env["ir.actions.actions"]._for_xml_id("survey.action_survey_user_input")
@@ -79,14 +81,15 @@ class SurveySurvey(models.Model):
                     elif q.question_type in ['simple_choice', 'multiple_choice']:
                         choices = lines.filtered(lambda l: l.question_id == q).mapped('suggested_answer_id.value')
                         val = ", ".join(choices)
-
+                    
+                
                 sheet.write(row, col, val)
                 col += 1
             row += 1
 
         workbook.close()
         output.seek(0)
-
+        
         file_name = f"{self.title}_Answers.xlsx"
         attachment = self.env['ir.attachment'].create({
             'name': file_name,
