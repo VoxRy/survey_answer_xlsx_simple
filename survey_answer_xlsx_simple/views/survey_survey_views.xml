@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="survey_survey_view_form_inherit_xlsx" model="ir.ui.view">
+        <field name="name">survey.survey.view.form.inherit.xlsx</field>
+        <field name="model">survey.survey</field>
+        <field name="inherit_id" ref="survey.survey_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="action_view_user_inputs" type="object" class="oe_stat_button" icon="fa-list-ol">
+                    <div class="o_stat_info">
+                        <span class="o_stat_text">Liste Görünümü</span>
+                    </div>
+                </button>
+            </xpath>
+            <xpath expr="//header" position="inside">
+                <button name="action_export_answers_xlsx" string="Excel Olarak Dışa Aktar" type="object" class="oe_highlight"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
